@@ -1,0 +1,27 @@
+{
+  "name": "anima-application",
+  "version": "1.0.0",
+  "description": "Active Patient Follow-Up Alert Dashboard",
+  "main": "index.js",
+  "scripts": {
+    "generate-data": "ts-node src/simulateData/index.ts",
+    "generate-data:cli": "ts-node src/simulateData/cli.ts",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "healthcare",
+    "dashboard",
+    "alerts",
+    "patient-safety"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "ts-node": "^10.9.1"
+  }
+}
