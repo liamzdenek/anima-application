@@ -126,9 +126,14 @@
 
 .formActions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 1rem;
   margin-top: 1rem;
+}
+
+.demoButtons {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .primaryButton {

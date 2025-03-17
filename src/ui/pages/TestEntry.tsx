@@ -11,7 +11,9 @@ import {
   updateField,
   resetForm,
   setDefaultRanges,
-  submitTestFx
+  submitTestFx,
+  loadNormalTestData,
+  loadAbnormalTestData
 } from '../stores/test';
 import { $isLoading, $error } from '../stores/results';
 import styles from './TestEntry.module.css';
@@ -27,6 +29,8 @@ export function TestEntryPage() {
   const handleUpdateField = useEvent(updateField);
   const handleResetForm = useEvent(resetForm);
   const handleSetDefaultRanges = useEvent(setDefaultRanges);
+  const handleLoadNormalData = useEvent(loadNormalTestData);
+  const handleLoadAbnormalData = useEvent(loadAbnormalTestData);
   
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
@@ -164,6 +168,7 @@ export function TestEntryPage() {
                   onChange={handleInputChange}
                   step="0.1"
                   required
+                  placeholder={`${formData.hemoglobinMin || '12.0'} - ${formData.hemoglobinMax || '16.0'}`}
                 />
                 {formErrors.hemoglobin && (
                   <div className={styles.fieldError}>{formErrors.hemoglobin}</div>
@@ -208,6 +213,7 @@ export function TestEntryPage() {
                   onChange={handleInputChange}
                   step="0.1"
                   required
+                  placeholder={`${formData.wbcMin || '4.5'} - ${formData.wbcMax || '11.0'}`}
                 />
                 {formErrors.wbc && (
                   <div className={styles.fieldError}>{formErrors.wbc}</div>
@@ -251,6 +257,7 @@ export function TestEntryPage() {
                   value={formData.platelets || ''}
                   onChange={handleInputChange}
                   required
+                  placeholder={`${formData.plateletsMin || '150'} - ${formData.plateletsMax || '450'}`}
                 />
                 {formErrors.platelets && (
                   <div className={styles.fieldError}>{formErrors.platelets}</div>
@@ -278,25 +285,259 @@ export function TestEntryPage() {
             </div>
           </div>
           
-          {/* Additional fields would follow the same pattern */}
-          {/* For brevity, I'm only including a few key fields */}
+          {/* Neutrophils */}
+          <div className={styles.testFieldGroup}>
+            <div className={styles.testFieldLabel}>
+              <label htmlFor="neutrophils">Neutrophils (10^9/L)</label>
+            </div>
+            <div className={styles.testFieldInputs}>
+              <div className={styles.testFieldValue}>
+                <input
+                  type="number"
+                  id="neutrophils"
+                  name="neutrophils"
+                  value={formData.neutrophils || ''}
+                  onChange={handleInputChange}
+                  step="0.1"
+                  required
+                  placeholder={`${formData.neutrophilsMin || '2.0'} - ${formData.neutrophilsMax || '7.5'}`}
+                />
+                {formErrors.neutrophils && (
+                  <div className={styles.fieldError}>{formErrors.neutrophils}</div>
+                )}
+              </div>
+              <div className={styles.testFieldRange}>
+                <input
+                  type="number"
+                  id="neutrophilsMin"
+                  name="neutrophilsMin"
+                  placeholder="Min"
+                  value={formData.neutrophilsMin || ''}
+                  onChange={handleInputChange}
+                  step="0.1"
+                />
+                <span>-</span>
+                <input
+                  type="number"
+                  id="neutrophilsMax"
+                  name="neutrophilsMax"
+                  placeholder="Max"
+                  value={formData.neutrophilsMax || ''}
+                  onChange={handleInputChange}
+                  step="0.1"
+                />
+              </div>
+            </div>
+          </div>
+          
+          {/* Lymphocytes */}
+          <div className={styles.testFieldGroup}>
+            <div className={styles.testFieldLabel}>
+              <label htmlFor="lymphocytes">Lymphocytes (10^9/L)</label>
+            </div>
+            <div className={styles.testFieldInputs}>
+              <div className={styles.testFieldValue}>
+                <input
+                  type="number"
+                  id="lymphocytes"
+                  name="lymphocytes"
+                  value={formData.lymphocytes || ''}
+                  onChange={handleInputChange}
+                  step="0.1"
+                  required
+                  placeholder={`${formData.lymphocytesMin || '1.0'} - ${formData.lymphocytesMax || '4.5'}`}
+                />
+                {formErrors.lymphocytes && (
+                  <div className={styles.fieldError}>{formErrors.lymphocytes}</div>
+                )}
+              </div>
+              <div className={styles.testFieldRange}>
+                <input
+                  type="number"
+                  id="lymphocytesMin"
+                  name="lymphocytesMin"
+                  placeholder="Min"
+                  value={formData.lymphocytesMin || ''}
+                  onChange={handleInputChange}
+                  step="0.1"
+                />
+                <span>-</span>
+                <input
+                  type="number"
+                  id="lymphocytesMax"
+                  name="lymphocytesMax"
+                  placeholder="Max"
+                  value={formData.lymphocytesMax || ''}
+                  onChange={handleInputChange}
+                  step="0.1"
+                />
+              </div>
+            </div>
+          </div>
+          
+          {/* RBC */}
+          <div className={styles.testFieldGroup}>
+            <div className={styles.testFieldLabel}>
+              <label htmlFor="rbc">RBC (10^12/L)</label>
+            </div>
+            <div className={styles.testFieldInputs}>
+              <div className={styles.testFieldValue}>
+                <input
+                  type="number"
+                  id="rbc"
+                  name="rbc"
+                  value={formData.rbc || ''}
+                  onChange={handleInputChange}
+                  step="0.1"
+                  required
+                  placeholder={`${formData.rbcMin || '4.0'} - ${formData.rbcMax || '5.5'}`}
+                />
+                {formErrors.rbc && (
+                  <div className={styles.fieldError}>{formErrors.rbc}</div>
+                )}
+              </div>
+              <div className={styles.testFieldRange}>
+                <input
+                  type="number"
+                  id="rbcMin"
+                  name="rbcMin"
+                  placeholder="Min"
+                  value={formData.rbcMin || ''}
+                  onChange={handleInputChange}
+                  step="0.1"
+                />
+                <span>-</span>
+                <input
+                  type="number"
+                  id="rbcMax"
+                  name="rbcMax"
+                  placeholder="Max"
+                  value={formData.rbcMax || ''}
+                  onChange={handleInputChange}
+                  step="0.1"
+                />
+              </div>
+            </div>
+          </div>
+          
+          {/* MCV */}
+          <div className={styles.testFieldGroup}>
+            <div className={styles.testFieldLabel}>
+              <label htmlFor="mcv">MCV (fL)</label>
+            </div>
+            <div className={styles.testFieldInputs}>
+              <div className={styles.testFieldValue}>
+                <input
+                  type="number"
+                  id="mcv"
+                  name="mcv"
+                  value={formData.mcv || ''}
+                  onChange={handleInputChange}
+                  required
+                  placeholder={`${formData.mcvMin || '80'} - ${formData.mcvMax || '100'}`}
+                />
+                {formErrors.mcv && (
+                  <div className={styles.fieldError}>{formErrors.mcv}</div>
+                )}
+              </div>
+              <div className={styles.testFieldRange}>
+                <input
+                  type="number"
+                  id="mcvMin"
+                  name="mcvMin"
+                  placeholder="Min"
+                  value={formData.mcvMin || ''}
+                  onChange={handleInputChange}
+                />
+                <span>-</span>
+                <input
+                  type="number"
+                  id="mcvMax"
+                  name="mcvMax"
+                  placeholder="Max"
+                  value={formData.mcvMax || ''}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+          </div>
+          
+          {/* MCH */}
+          <div className={styles.testFieldGroup}>
+            <div className={styles.testFieldLabel}>
+              <label htmlFor="mch">MCH (pg)</label>
+            </div>
+            <div className={styles.testFieldInputs}>
+              <div className={styles.testFieldValue}>
+                <input
+                  type="number"
+                  id="mch"
+                  name="mch"
+                  value={formData.mch || ''}
+                  onChange={handleInputChange}
+                  required
+                  placeholder={`${formData.mchMin || '27'} - ${formData.mchMax || '33'}`}
+                />
+                {formErrors.mch && (
+                  <div className={styles.fieldError}>{formErrors.mch}</div>
+                )}
+              </div>
+              <div className={styles.testFieldRange}>
+                <input
+                  type="number"
+                  id="mchMin"
+                  name="mchMin"
+                  placeholder="Min"
+                  value={formData.mchMin || ''}
+                  onChange={handleInputChange}
+                />
+                <span>-</span>
+                <input
+                  type="number"
+                  id="mchMax"
+                  name="mchMax"
+                  placeholder="Max"
+                  value={formData.mchMax || ''}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+          </div>
         </div>
         
         <div className={styles.formActions}>
-          <button
-            type="button"
-            className={styles.secondaryButton}
-            onClick={handleResetForm}
-          >
-            Reset
-          </button>
-          <button
-            type="submit"
-            className={styles.primaryButton}
-            disabled={!isFormValid || isLoading}
-          >
-            {isLoading ? 'Processing...' : 'Submit Results'}
-          </button>
+          <div className={styles.demoButtons}>
+            <button
+              type="button"
+              className={styles.secondaryButton}
+              onClick={handleLoadNormalData}
+            >
+              Load Normal Demo
+            </button>
+            <button
+              type="button"
+              className={styles.secondaryButton}
+              onClick={handleLoadAbnormalData}
+            >
+              Load Abnormal Demo
+            </button>
+          </div>
+          <div>
+            <button
+              type="button"
+              className={styles.secondaryButton}
+              onClick={handleResetForm}
+            >
+              Reset
+            </button>
+            <button
+              type="submit"
+              className={styles.primaryButton}
+              disabled={!isFormValid || isLoading}
+            >
+              {isLoading ? 'Processing...' : 'Submit Results'}
+            </button>
+          </div>
         </div>
       </form>
     </div>

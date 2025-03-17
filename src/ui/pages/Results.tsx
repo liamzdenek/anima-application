@@ -68,7 +68,7 @@ export function ResultsPage() {
       <div className={styles.resultsContainer}>
         <div className={styles.resultsSummary}>
           <div className={`${styles.predictionCard} ${results.prediction === 'ABNORMAL' ? styles.abnormal : styles.normal}`}>
-            <h3>Prediction</h3>
+            <h3>Overall Prediction</h3>
             <div className={styles.predictionValue}>{results.prediction}</div>
             <div className={styles.predictionDetails}>
               <div className={styles.detailItem}>
@@ -144,11 +144,43 @@ export function ResultsPage() {
               <p>Validation metrics not available.</p>
             ) : (
               <div className={styles.metricsGrid}>
+                <div className={`${styles.metricCard} ${isMetricValid('accuracy', validationMetrics.accuracy) ? styles.valid : styles.invalid}`}>
+                  <div className={styles.metricName}>Accuracy</div>
+                  <div className={styles.metricValue}>{validationMetrics.accuracy.toFixed(2)}</div>
+                  <div className={styles.metricThreshold}>
+                    Threshold: {validationThresholds.accuracy}
+                  </div>
+                </div>
+                
+                <div className={`${styles.metricCard} ${isMetricValid('precision', validationMetrics.precision) ? styles.valid : styles.invalid}`}>
+                  <div className={styles.metricName}>Precision</div>
+                  <div className={styles.metricValue}>{validationMetrics.precision.toFixed(2)}</div>
+                  <div className={styles.metricThreshold}>
+                    Threshold: {validationThresholds.precision}
+                  </div>
+                </div>
+                
+                <div className={`${styles.metricCard} ${isMetricValid('recall', validationMetrics.recall) ? styles.valid : styles.invalid}`}>
+                  <div className={styles.metricName}>Recall</div>
+                  <div className={styles.metricValue}>{validationMetrics.recall.toFixed(2)}</div>
+                  <div className={styles.metricThreshold}>
+                    Threshold: {validationThresholds.recall}
+                  </div>
+                </div>
+                
                 <div className={`${styles.metricCard} ${isMetricValid('aucRoc', validationMetrics.aucRoc) ? styles.valid : styles.invalid}`}>
                   <div className={styles.metricName}>AUC-ROC</div>
                   <div className={styles.metricValue}>{validationMetrics.aucRoc.toFixed(2)}</div>
                   <div className={styles.metricThreshold}>
                     Threshold: {validationThresholds.aucRoc}
+                  </div>
+                </div>
+                
+                <div className={`${styles.metricCard} ${isMetricValid('f1Score', validationMetrics.f1Score) ? styles.valid : styles.invalid}`}>
+                  <div className={styles.metricName}>F1 Score</div>
+                  <div className={styles.metricValue}>{validationMetrics.f1Score.toFixed(2)}</div>
+                  <div className={styles.metricThreshold}>
+                    Threshold: {validationThresholds.f1Score}
                   </div>
                 </div>
                 
@@ -165,14 +197,6 @@ export function ResultsPage() {
                   <div className={styles.metricValue}>{validationMetrics.specificity.toFixed(2)}</div>
                   <div className={styles.metricThreshold}>
                     Threshold: {validationThresholds.specificity}
-                  </div>
-                </div>
-                
-                <div className={`${styles.metricCard} ${isMetricValid('f1Score', validationMetrics.f1Score) ? styles.valid : styles.invalid}`}>
-                  <div className={styles.metricName}>F1 Score</div>
-                  <div className={styles.metricValue}>{validationMetrics.f1Score.toFixed(2)}</div>
-                  <div className={styles.metricThreshold}>
-                    Threshold: {validationThresholds.f1Score}
                   </div>
                 </div>
                 

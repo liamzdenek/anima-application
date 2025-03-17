@@ -105,12 +105,38 @@ export interface PredictionResponse {
   timestamp: string;
 }
 
+// Model metrics
+export interface ModelMetrics {
+  accuracy: number;
+  precision: number;
+  recall: number;
+  f1: number;
+  roc_auc: number;
+  confusion_matrix: number[][];
+  best_params: Record<string, any>;
+  cv_results: {
+    mean_test_score: number;
+    std_test_score: number;
+  };
+  feature_importance?: Record<string, number>;
+  model_name: string;
+  classification_report: Record<string, any>;
+  roc_curve: {
+    fpr: number[];
+    tpr: number[];
+  };
+  pr_curve: {
+    precision: number[];
+    recall: number[];
+  };
+}
+
 // Model information
 export interface ModelInfo {
   name: string;
   version: string;
   created_at: string;
-  metrics: Record<string, any>;
+  metrics: ModelMetrics;
   feature_importance?: Record<string, number>;
 }
 

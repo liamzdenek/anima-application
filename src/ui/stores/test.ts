@@ -46,6 +46,90 @@ const defaultFormData: TestFormData = {
   mchMax: 0,
 };
 
+// Normal test data for demonstration
+const normalTestData: TestFormData = {
+  patientId: 'P-123456',
+  age: 45,
+  gender: 'F',
+  testId: 'TEST-789012',
+  testDate: new Date().toISOString().split('T')[0],
+  
+  // CBC values within normal range for a 45-year-old female
+  hemoglobin: 13.5,
+  hemoglobinMin: 12.0,
+  hemoglobinMax: 16.0,
+  
+  wbc: 7.2,
+  wbcMin: 4.5,
+  wbcMax: 11.0,
+  
+  platelets: 250,
+  plateletsMin: 150,
+  plateletsMax: 450,
+  
+  neutrophils: 4.1,
+  neutrophilsMin: 2.0,
+  neutrophilsMax: 7.5,
+  
+  lymphocytes: 2.3,
+  lymphocytesMin: 1.0,
+  lymphocytesMax: 4.5,
+  
+  rbc: 4.6,
+  rbcMin: 4.0,
+  rbcMax: 5.5,
+  
+  mcv: 90,
+  mcvMin: 80,
+  mcvMax: 100,
+  
+  mch: 30,
+  mchMin: 27,
+  mchMax: 33,
+};
+
+// Abnormal test data for demonstration
+const abnormalTestData: TestFormData = {
+  patientId: 'P-654321',
+  age: 52,
+  gender: 'M',
+  testId: 'TEST-987654',
+  testDate: new Date().toISOString().split('T')[0],
+  
+  // CBC values with several abnormal parameters
+  hemoglobin: 10.2, // Low
+  hemoglobinMin: 13.5,
+  hemoglobinMax: 17.5,
+  
+  wbc: 15.8, // High
+  wbcMin: 4.5,
+  wbcMax: 11.0,
+  
+  platelets: 120, // Low
+  plateletsMin: 150,
+  plateletsMax: 450,
+  
+  neutrophils: 12.5, // High
+  neutrophilsMin: 2.0,
+  neutrophilsMax: 7.5,
+  
+  lymphocytes: 0.8, // Low
+  lymphocytesMin: 1.0,
+  lymphocytesMax: 4.5,
+  
+  rbc: 3.8, // Low
+  rbcMin: 4.5,
+  rbcMax: 5.9,
+  
+  mcv: 75, // Low
+  mcvMin: 80,
+  mcvMax: 100,
+  
+  mch: 25, // Low
+  mchMin: 27,
+  mchMax: 33,
+};
+
 // Events
 export const updateField = createEvent<{
   field: keyof TestFormData;
@@ -58,6 +142,10 @@ export const setDefaultRanges = createEvent<{
   gender?: 'M' | 'F';
   age?: number;
 }>();
+
+// Demo data events
+export const loadNormalTestData = createEvent();
+export const loadAbnormalTestData = createEvent();
 
 // Effects
 export const submitTestFx = createEffect(async (formData: TestFormData) => {
@@ -116,7 +204,10 @@ export const $testForm = createStore<TestFormData>(defaultFormData)
       };
     }
     return state;
-  });
+  })
+  // Handle demo data loading
+  .on(loadNormalTestData, () => normalTestData)
+  .on(loadAbnormalTestData, () => abnormalTestData);
 
 // Validation
 export const $formErrors = $testForm.map((form) => {

@@ -256,8 +256,8 @@ class ModelHandler:
         # Calculate contributions
         contributions = []
         for i, feature in enumerate(self.feature_names):
-            # Skip non-numeric features
-            if feature in ['patientId', 'gender', 'testDate']:
+            # Skip non-numeric features and derived metrics
+            if feature in ['patientId', 'gender', 'testDate', 'confidence']:
                 continue
             
             # Get feature value
@@ -287,7 +287,7 @@ class ModelHandler:
                 'is_abnormal': is_abnormal
             })
         
-        # Sort by contribution and get top 5
+        # Sort by contribution (highest first)
         contributions.sort(key=lambda x: x['contribution'], reverse=True)
         return contributions[:5]
     
