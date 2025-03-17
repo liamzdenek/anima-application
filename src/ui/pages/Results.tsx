@@ -4,6 +4,7 @@
 import React, { useEffect } from 'react';
 import { Link } from '@tanstack/react-router';
 import { useStore } from 'effector-react';
+import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import {
   $predictionResults,
   $isLoading,
@@ -27,6 +28,17 @@ export function ResultsPage() {
   useEffect(() => {
     getModelInfoFx();
   }, []);
+  
+  // Empty handlers for thumbs up/down buttons
+  const handleThumbsUp = () => {
+    // No operation for now
+    console.log('Thumbs up clicked');
+  };
+  
+  const handleThumbsDown = () => {
+    // No operation for now
+    console.log('Thumbs down clicked');
+  };
   
   if (isLoading) {
     return (
@@ -214,6 +226,22 @@ export function ResultsPage() {
       </div>
       
       <div className={styles.resultsActions}>
+        <div className={styles.feedbackButtons}>
+          <button
+            onClick={handleThumbsUp}
+            className={`${styles.feedbackButton} ${styles.thumbsUp}`}
+            aria-label="Thumbs Up"
+          >
+            <FaThumbsUp /> Helpful
+          </button>
+          <button
+            onClick={handleThumbsDown}
+            className={`${styles.feedbackButton} ${styles.thumbsDown}`}
+            aria-label="Thumbs Down"
+          >
+            <FaThumbsDown /> Not Helpful
+          </button>
+        </div>
         <Link to="/test-entry" className={styles.secondaryButton}>
           Enter New Test
         </Link>

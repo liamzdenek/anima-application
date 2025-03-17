@@ -265,8 +265,54 @@
 
 .resultsActions {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 2rem;
+  gap: 1rem;
+}
+
+.feedbackButtons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.feedbackButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.feedbackButton:hover {
+  transform: translateY(-2px);
+}
+
+.feedbackButton:active {
+  transform: translateY(0);
+}
+
+.thumbsUp {
+  background-color: #def7ec;
+  color: #046c4e;
+}
+
+.thumbsUp:hover {
+  background-color: #c6f6d5;
+}
+
+.thumbsDown {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.thumbsDown:hover {
+  background-color: #fecaca;
 }
 
 .secondaryButton {
