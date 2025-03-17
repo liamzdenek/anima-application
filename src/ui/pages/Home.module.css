@@ -1,0 +1,82 @@
+/* Home page styles */
+.homePage {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.heroSection {
+  background-color: #f0f4f8;
+  padding: 3rem 2rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.heroSection h2 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 2rem;
+}
+
+.heroSection p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 1rem auto;
+  color: #4a5568;
+}
+
+.ctaButtons {
+  margin-top: 2rem;
+}
+
+.primaryButton {
+  display: inline-block;
+  background-color: #3498db;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.primaryButton:hover {
+  background-color: #2980b9;
+}
+
+.infoSection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.infoCard {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.infoCard h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 1.25rem;
+  border-bottom: 2px solid #f0f4f8;
+  padding-bottom: 0.5rem;
+}
+
+.infoCard p {
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.infoCard ul {
+  padding-left: 1.5rem;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.infoCard li {
+  margin-bottom: 0.5rem;
+}
