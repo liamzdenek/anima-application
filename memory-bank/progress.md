@@ -76,6 +76,7 @@ The Active Patient Follow-Up Alert Dashboard is in the **implementation phase** 
 - ❌ Notification system
 
 ### Deployment
+- 🔄 AWS CDK infrastructure
 - ❌ Containerization
 - ❌ CI/CD pipeline
 - ❌ Production configuration

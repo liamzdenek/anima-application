@@ -8,7 +8,7 @@ The Active Patient Follow-Up Alert Dashboard project is currently in the impleme
 2. **UI Refinement**: Improving the user experience for healthcare providers
 3. **Active Learning Implementation**: Completing the feedback loop for model improvement
 4. **Validation Reporting**: Enhancing the validation reports for clinical stakeholders
-
+5. **AWS Deployment**: Setting up infrastructure for deploying to AWS using CDK
 ## Recent Changes
 
 ### Data Simulation
@@ -27,11 +27,20 @@ The Active Patient Follow-Up Alert Dashboard project is currently in the impleme
 - Added support for single and batch predictions
 - Implemented model loading and versioning
 - Created detailed response schema with confidence scores and contributing factors
+- Added Lambda handler for AWS deployment
 
 ### User Interface
 - Implemented test entry form with reference range inputs
 - Created results display with risk scores and contributing factors
 - Added demo data loading for testing
+- Implemented form validation and error handling
+- Updated API client to support configurable endpoints
+
+### AWS Deployment
+- Created AWS CDK infrastructure for deployment
+- Set up S3 and CloudFront for frontend hosting
+- Configured Lambda and API Gateway for backend
+- Created deployment script for automated deployment
 - Implemented form validation and error handling
 
 ## Active Decisions
@@ -67,18 +76,21 @@ The Active Patient Follow-Up Alert Dashboard project is currently in the impleme
 2. Enhance the UI with more intuitive visualization of risk scores
 3. Add more comprehensive error handling throughout the system
 4. Implement automated testing for critical components
+5. Deploy the application to AWS using the CDK infrastructure
 
 ### Medium-term (Next 1-2 Months)
 1. Add support for additional types of blood tests
 2. Implement user authentication and role-based access control
 3. Create an administrative dashboard for monitoring system performance
 4. Develop a more sophisticated model retraining pipeline
+5. Set up CI/CD pipeline for automated deployments
 
 ### Long-term (3+ Months)
 1. Integrate with real EMR systems through FHIR/HL7 standards
 2. Explore more advanced ML models (e.g., deep learning)
 3. Implement a full audit trail for clinical decision support
 4. Develop mobile applications for on-the-go alerts
+5. Implement multi-region deployment for high availability
 
 ## Open Questions
 

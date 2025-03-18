@@ -1,20 +1,111 @@
 # Active Patient Follow-Up Alert Dashboard
 
-A system for detecting abnormal blood test results and alerting healthcare providers for timely patient follow-up.
+A lightweight web application that simulates an automated alert system for abnormal lab results. The dashboard displays a list of patients flagged for follow-up, with risk scores derived from a machine learning model that can be refined through user feedback—implementing an active learning loop.
 
 ## Project Overview
 
-This project implements a machine learning-based system that analyzes blood test results to identify abnormal patterns and prioritize patient follow-ups. It consists of three main components:
+The Active Patient Follow-Up Alert Dashboard is designed to help healthcare providers identify and prioritize patients with abnormal lab results that require clinical follow-up. The system uses machine learning to analyze blood test results, assign risk scores, and provide explanations for its predictions.
 
-1. **Training Module**: Python code for preprocessing data, engineering features, and training ML models
-2. **Inference API**: FastAPI server for serving predictions from the trained model
-3. **User Interface**: React application for RNs to enter test results and view predictions
+## Features
 
-## Directory Structure
+- Abnormal lab result detection
+- Risk score calculation
+- Explanation of contributing factors
+- Active learning through user feedback
+- Synthetic data generation for testing
+- AWS deployment using CDK
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 16+ with npm
+- Python 3.8+ with pip
+- Git
+- AWS CLI (for deployment)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd anima-application
+   ```
+
+2. Install Python dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Install Node.js dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Install UI dependencies:
+   ```bash
+   cd src/ui
+   npm install
+   cd ../..
+   ```
+
+### Running the Application Locally
+
+1. Generate simulated data:
+   ```bash
+   npx ts-node src/simulateData/cli.ts --patients 500
+   ```
+
+2. Train and validate the model:
+   ```bash
+   python -m src.training.train
+   python -m src.validation.validate
+   ```
+
+3. Start the complete application (API + UI):
+   ```bash
+   ./run_app.sh
+   ```
+
+   Or run components separately:
+
+   Start only the API:
+   ```bash
+   python -m src.inference.app
+   ```
+
+   Start only the UI:
+   ```bash
+   cd src/ui
+   npm run dev
+   ```
+
+### Deploying to AWS
+
+The application can be deployed to AWS using the AWS Cloud Development Kit (CDK):
+
+1. Configure AWS CLI:
+   ```bash
+   aws configure
+   ```
+
+2. Deploy the application:
+   ```bash
+   ./deploy.sh
+   ```
+
+This will:
+- Deploy the backend to AWS Lambda and API Gateway
+- Deploy the frontend to S3 and CloudFront
+- Output the URLs for accessing the deployed application
+
+## Project Structure
 
 ```
 .
+├── cdk/                  # AWS CDK infrastructure code
 ├── data/                 # Simulated patient data
+├── memory-bank/          # Project documentation
 ├── model/                # Trained model artifacts
 ├── reports/              # Validation reports
 ├── src/
@@ -24,74 +115,20 @@ This project implements a machine learning-based system that analyzes blood test
 │   ├── training/         # Model training code
 │   ├── ui/               # React user interface
 │   └── validation/       # Model validation tools
+├── deploy.sh             # Script to deploy to AWS
 ├── run_app.sh            # Script to run the complete application
 ├── run_ml_pipeline.py    # Script to run the ML pipeline
 └── run_ui.sh             # Script to run the UI only
 ```
 
-## Getting Started
+## AWS Architecture
 
-### Prerequisites
+The application is deployed to AWS with the following architecture:
 
-- Python 3.8+ with pip
-- Node.js 16+ with npm
-
-### Installation
-
-1. Install Python dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-2. Generate simulated data:
-   ```bash
-   npx ts-node src/simulateData/cli.ts --patients 500
-   ```
-
-3. Train the model:
-   ```bash
-   python -m src.training.train
-   ```
-
-4. Validate the model:
-   ```bash
-   python -m src.validation.validate
-   ```
-
-### Running the Application
-
-To run the complete application (both API and UI):
-
-```bash
-./run_app.sh
-```
-
-To run only the UI:
-
-```bash
-./run_ui.sh
-```
-
-To run only the inference API:
-
-```bash
-python -m src.inference.app
-```
-
-## Components
-
-### Training Module
-
-The training module preprocesses patient data, engineers features, and trains machine learning models to detect abnormal blood test results. See [Training README](src/training/README.md) for details.
-
-### Inference API
-
-The inference API serves predictions from the trained model via a RESTful API. It provides endpoints for making predictions for individual patients or in batch. See [Inference README](src/inference/README.md) for details.
-
-### User Interface
-
-The UI allows Registered Nurses to enter blood test results and view model predictions. It displays the prediction result, confidence score, and validation metrics. See [UI README](src/ui/README.md) for details.
+- **Frontend**: Static assets hosted in S3 and served through CloudFront
+- **Backend**: FastAPI application running in AWS Lambda, exposed through API Gateway
+- **Infrastructure**: Defined using AWS CDK in TypeScript
 
 ## License
 
-This project is for demonstration purposes only.
+This project is licensed under the MIT License - see the LICENSE file for details.

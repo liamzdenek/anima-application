@@ -2,8 +2,7 @@
  * API client for the RN Blood Test Interface
  */
 import { TestFormData, PredictionRequest, PredictionResponse, ModelInfo } from './types';
-
-const API_BASE_URL = 'http://localhost:3000/api';
+import { API_BASE_URL } from './config';
 
 /**
  * Convert form data to API request format

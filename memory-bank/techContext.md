@@ -169,6 +169,22 @@ npm run dev
 - **Docker Support**: Not implemented yet, but planned
 - **CI/CD**: Not implemented yet, but planned
 
+## Deployment Infrastructure
+
+### AWS CDK Deployment
+
+- **Frontend**: Static assets hosted in S3 and served through CloudFront
+- **Backend**: FastAPI application running in AWS Lambda, exposed through API Gateway
+- **Infrastructure as Code**: AWS CDK with TypeScript
+- **Deployment Script**: Automated deployment with `deploy.sh`
+
+### Environment Configuration
+
+- **API Endpoint**: Configured at build time via environment variables
+- **Lambda Configuration**: Python 3.9 runtime with 512MB memory
+- **CloudFront**: HTTPS-only with optimized caching policy
+- **S3**: Private bucket with CloudFront Origin Access Identity
+
 ## Future Technical Considerations
 
 1. **Docker Containerization**: Package components for easier deployment
@@ -176,3 +192,5 @@ npm run dev
 3. **Authentication/Authorization**: Add user management for production use
 4. **Advanced ML Models**: Explore deep learning approaches for better performance
 5. **Real-time Updates**: Add WebSocket support for live updates
+6. **CI/CD Pipeline**: Automate testing and deployment
+7. **Multi-Region Deployment**: Improve availability and latency
